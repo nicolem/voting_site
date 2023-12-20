@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Election results</h1>
+
+<table id="candidates">
+  <% @candidates.each do |candidate| %>
+    <tr>
+      <td> <%= candidate.name %> </td>
+      <td> <%= candidate.voters.length %> </td>
+    </tr>
+  <% end %>
+</table>

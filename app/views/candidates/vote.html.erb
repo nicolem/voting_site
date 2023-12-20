@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Cast your vote today!</h1>
+
+<%= form_for(@voter) do |f| %>
+  <% @candidates.each do |candidate| %>
+    <%= f.radio_button :candidate_id, candidate.id %>
+    <%= f.label :candidate_id, candidate.name %>
+    <br />
+  <% end %>
+  <div>
+    <%= f.submit "Vote" %>
+  </div>
+<% end %>
+
+
+<% if @candidates.count < 10 %>
+<hr>
+  Or, add a new candidate:
+
+  <%= form_for(@candidate) do |f| %>
+    <div>
+      <%= f.text_field :name %>
+      <%= f.submit  "Vote" %>
+    </div>
+  <% end %>
+<% end %>

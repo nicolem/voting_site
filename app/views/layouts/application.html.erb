@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VotingMachine</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div>VOTE.WEBSITE</div>
+    <% if session[:current_voter_id].present? %>
+      <div> Signed in as <%=Voter.find(session[:current_voter_id]).email %> </div>
+      <div> Your session will expire in <%= Time.at(Time.parse(session[:expires_at]) - Time.now).utc.strftime("%M:%S") %> </div>
+      <%= link_to "Sign out", sign_out_url %>
+    <% else %>
+      <%= link_to "Vote", start_path %>
+    <% end %>
+    <%= link_to "Results", results_path %>
+    <%= yield %>
+  </body>
+</html>
